@@ -12,3 +12,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int           @id @default(autoincrement())
+  name          String
+  email         String        @unique
+  password      String
+  userDietaries UserDietary[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model DietaryRestriction {
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  description   String?
+  userDietaries UserDietary[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model UserDietary {
+  userId    Int
+  dietaryId Int
+  user      User               @relation(fields: [userId], references: [id])
+  dietary   DietaryRestriction @relation(fields: [dietaryId], references: [id])
+
+  @@id([userId, dietaryId])
+}
