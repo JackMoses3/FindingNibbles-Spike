@@ -5,23 +5,24 @@ import { DatabaseService } from 'src/database/database.service';
 @Injectable()
 export class DietaryRestrictionService {
   constructor(private readonly db: DatabaseService) {}
-  create(createDietaryRestrictionDto: Prisma.DietaryRestrictionCreateInput) {
+  
+  async create(createDietaryRestrictionDto: Prisma.DietaryRestrictionCreateInput) {
     return this.db.dietaryRestriction.create({data: createDietaryRestrictionDto});
   }
 
-  findAll() {
+  async findAll() {
     return this.db.dietaryRestriction.findMany();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.db.dietaryRestriction.findUnique({where: {id}});
   }
 
-  update(id: number, updateDietaryRestrictionDto: Prisma.DietaryRestrictionUpdateInput) {
+  async update(id: number, updateDietaryRestrictionDto: Prisma.DietaryRestrictionUpdateInput) {
     return this.db.dietaryRestriction.update({where: {id}, data: updateDietaryRestrictionDto});
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.db.dietaryRestriction.delete({where: {id}});
   }
 }
