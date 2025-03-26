@@ -10,7 +10,7 @@ class DioClient {
   DioClient._internal() {
     dio = Dio(
       BaseOptions(
-        baseUrl: 'http://localhost:3000', // or your actual backend URL
+        baseUrl: 'http://10.0.2.2:3000',
         connectTimeout: const Duration(seconds: 5),
         receiveTimeout: const Duration(seconds: 5),
         headers: {'Content-Type': 'application/json'},

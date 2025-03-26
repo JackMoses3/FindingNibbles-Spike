@@ -1,14 +1,17 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
-import{ Prisma } from '@prisma/client';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
-
 
 @Injectable()
 export class UserService {
   constructor(private readonly db: DatabaseService) {}
 
   async create(createUserDto: Prisma.UserCreateInput) {
-    return this.db.user.create({data: createUserDto});
+    return this.db.user.create({ data: createUserDto });
   }
 
   async findAll() {
@@ -16,17 +19,17 @@ export class UserService {
   }
 
   async findOne(id: number) {
-    return this.db.user.findUnique({where: {id}});
+    return this.db.user.findUnique({ where: { id } });
   }
 
   async update(id: number, updateUserDto: Prisma.UserUpdateInput) {
-    return this.db.user.update({where: {id}, data: updateUserDto});
+    return this.db.user.update({ where: { id }, data: updateUserDto });
   }
 
   async remove(id: number) {
-    return this.db.user.delete({where: {id}});
+    return this.db.user.delete({ where: { id } });
   }
- 
+
   async addDietaryRestriction(userId: number, dietaryId: number) {
     // Check if the relation already exists (optional but good for idempotency)
     const existing = await this.db.userDietary.findUnique({
@@ -60,11 +63,13 @@ export class UserService {
         },
       },
     });
-  
+
     if (!existing) {
-      throw new NotFoundException('This dietary restriction is not assigned to the user');
+      throw new NotFoundException(
+        'This dietary restriction is not assigned to the user',
+      );
     }
-  
+
     // Delete the relation
     return this.db.userDietary.delete({
       where: {
@@ -75,5 +80,4 @@ export class UserService {
       },
     });
   }
-
 }
