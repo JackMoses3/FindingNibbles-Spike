@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { Prisma } from '@prisma/client';
 
@@ -22,7 +30,10 @@ export class UserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: Prisma.UserUpdateInput) {
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: Prisma.UserUpdateInput,
+  ) {
     return this.userService.update(+id, updateUserDto);
   }
 
@@ -32,12 +43,18 @@ export class UserController {
   }
 
   @Post(':userId/dietary/:dietaryId')
-  addDietaryToUser(@Param('userId') userId: string, @Param('dietaryId') dietaryId: string) {
+  addDietaryToUser(
+    @Param('userId') userId: string,
+    @Param('dietaryId') dietaryId: string,
+  ) {
     return this.userService.addDietaryRestriction(+userId, +dietaryId);
   }
 
   @Delete(':userId/dietary/:dietaryId')
-  removeDietaryFromUser(@Param('userId') userId: string, @Param('dietaryId') dietaryId: string) {
+  removeDietaryFromUser(
+    @Param('userId') userId: string,
+    @Param('dietaryId') dietaryId: string,
+  ) {
     return this.userService.removeDietaryRestriction(+userId, +dietaryId);
   }
 }
