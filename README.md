@@ -28,7 +28,7 @@ Welcome to **Finding Nibbles Spike** — a full-stack prototype built to explore
 
 ---
 
-# FindingNibbles-Spike
+# Tutorial plan
 
 Here is a link to the Tutorial plan site https://finding-nibbles.gitbook.io/finding-nibbles/
 
