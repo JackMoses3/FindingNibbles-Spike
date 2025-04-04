@@ -47,7 +47,7 @@ export class UserController {
     @Param('userId') userId: string,
     @Param('dietaryId') dietaryId: string,
   ) {
-    return this.userService.addDietaryRestriction(+userId, +dietaryId);
+    return this.userService.addUserDietary(+userId, +dietaryId);
   }
 
   @Delete(':userId/dietary/:dietaryId')
@@ -55,6 +55,6 @@ export class UserController {
     @Param('userId') userId: string,
     @Param('dietaryId') dietaryId: string,
   ) {
-    return this.userService.removeDietaryRestriction(+userId, +dietaryId);
+    return this.userService.removeUserDietary(+userId, +dietaryId);
   }
 }

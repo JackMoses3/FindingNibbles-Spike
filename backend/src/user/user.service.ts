@@ -30,7 +30,7 @@ export class UserService {
     return this.db.user.delete({ where: { id } });
   }
 
-  async addDietaryRestriction(userId: number, dietaryId: number) {
+  async addUserDietary(userId: number, dietaryId: number) {
     // Check if the relation already exists (optional but good for idempotency)
     const existing = await this.db.userDietary.findUnique({
       where: {
@@ -53,7 +53,7 @@ export class UserService {
     });
   }
 
-  async removeDietaryRestriction(userId: number, dietaryId: number) {
+  async removeUserDietary(userId: number, dietaryId: number) {
     // Optional: Check if the relation exists first
     const existing = await this.db.userDietary.findUnique({
       where: {
